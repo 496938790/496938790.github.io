@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Inse个人博客</title>
+  <title>redis学习笔记 5种基本数据类型的介绍 | Inse个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Inse个人博客">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+  <meta name="description" content="公司所用的项目只用到了redis进行数据字典缓存，而且是封装好了，准备自己上网去从头开始看一下redis,做个笔记记录一下QAQ(懒得排版所以样式好丑hhhhhh) 1.redis要解决的问题海量用户高并发 解决思路降低磁盘io去除数据之间的关系，越简单越好2.redis简介C语言开发的一个开源的高性能键值对数据库特征：数据间没有必然的关联关系内部采用单线程进行工作高性能多数据类型支持持久化支持。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis学习笔记 5种基本数据类型的介绍">
+<meta property="og:url" content="http://yoursite.com/2020/01/11/redis/index.html">
 <meta property="og:site_name" content="Inse个人博客">
+<meta property="og:description" content="公司所用的项目只用到了redis进行数据字典缓存，而且是封装好了，准备自己上网去从头开始看一下redis,做个笔记记录一下QAQ(懒得排版所以样式好丑hhhhhh) 1.redis要解决的问题海量用户高并发 解决思路降低磁盘io去除数据之间的关系，越简单越好2.redis简介C语言开发的一个开源的高性能键值对数据库特征：数据间没有必然的关联关系内部采用单线程进行工作高性能多数据类型支持持久化支持。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-01-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-18T15:00:11.933Z">
 <meta property="article:author" content="Inse">
 <meta name="twitter:card" content="summary">
   
@@ -150,140 +154,167 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-redis" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      redis学习笔记 5种基本数据类型的介绍
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/11/redis/" class="archive-article-date">
+
+        
+        <a href="/2020/01/11/redis/" class="archive-article-date">
   	<time datetime="2020-01-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-11</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/11/redis/">redis学习笔记 5种基本数据类型的介绍</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
+        
+      </header>
     
-    
+    <div class="article-entry" itemprop="articleBody">
       
-        </div></section>
+        <p>公司所用的项目只用到了redis进行数据字典缓存，而且是封装好了，准备自己上网去从头开始看一下redis,做个笔记记录一下QAQ(懒得排版所以样式好丑hhhhhh)</p>
+<p>1.redis要解决的问题<br>海量用户<br>高并发</p>
+<p>解决思路<br>降低磁盘io<br>去除数据之间的关系，越简单越好<br>2.redis简介<br>C语言开发的一个开源的高性能键值对数据库<br>特征：<br>数据间没有必然的关联关系<br>内部采用单线程进行工作<br>高性能<br>多数据类型支持<br>持久化支持。进行数据灾难恢复（非主推）<br>3.redis的应用<br>热点数据加速查询。微博热点<br>任务队列，抢票，秒杀<br>即时信息查询<br>时效性信息控制<br>分布式数据分享，分布式集群架构中的session分离<br>分布式锁<br>4.redis的基本操作<br>5.redis存储类型<br>string hash list set sorted_set<br>redis自身是一个MAP 所有的数据都是采用key : value的形式</p>
+<p>string 添加修改 set get del</p>
+<p>hash 一个存储空间保存多个键值对信息<br>当hash里面的K数量较小，存储结构优化成类数组结构。<br>较多，使用的hashMap结构<br>hset key filed value<br>hget hgetall key<br>hash类型下只能存储字符串，不存在嵌套现象<br>不能讲hash作为对象列表使用</p>
+<p>list存储多个数据，并对数据进入存储空间的顺序进行区分<br>底层使用双向链表存储结构<br>lpush rpush<br>lrange key start stop<br>lindex key<br>llen key<br>日志队列</p>
+<p>set存储大量数据，在查询方面提供高效率<br>sadd smember srem scard sismember<br>选爱好，摸索你喜欢什么东西，随机推荐歌曲，热点新闻，推荐APP<br>访问数据的统计，权限，黑白名单的操作<br>srandmember 随机获取集合中指定数量的数据 数据不变<br>spop 随机获取集合中的某个数据并将数据移出集合<br>交集，并集操作 比如两个人都关注同一个公众号，那么没有关注的公众号可以互相推荐给对方<br>sinter sunion sdiff<br>sinterstore</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/09/idea%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AEmaven%E7%9A%84%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2019-10-09T11:55:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/09/idea%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AEmaven%E7%9A%84%E6%96%B9%E6%B3%95/">idea全局配置maven的方法</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/01/11/redis/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/09/IDEA%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%B9%B6%E4%B8%8A%E4%BC%A0%E5%88%B0%E6%9C%AC%E5%9C%B0%E7%89%88%E6%9C%AC%E5%BA%93/" class="archive-article-date">
-  	<time datetime="2019-10-09T02:51:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-09</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/09/idea%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AEmaven%E7%9A%84%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">idea全局配置maven的方法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/09/IDEA%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%B9%B6%E4%B8%8A%E4%BC%A0%E5%88%B0%E6%9C%AC%E5%9C%B0%E7%89%88%E6%9C%AC%E5%BA%93/">IDEA新建项目并上传到本地版本库</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/17/maven%E6%A8%A1%E5%9D%97%E5%8C%96%E9%A1%B9%E7%9B%AE%E6%80%BB%E5%85%B1%E6%A8%A1%E5%9D%97%E7%9B%B8%E4%BA%92%E5%BC%95%E7%94%A8%E6%89%93%E5%8C%85%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2019-09-17T11:55:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/17/maven%E6%A8%A1%E5%9D%97%E5%8C%96%E9%A1%B9%E7%9B%AE%E6%80%BB%E5%85%B1%E6%A8%A1%E5%9D%97%E7%9B%B8%E4%BA%92%E5%BC%95%E7%94%A8%E6%89%93%E5%8C%85%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98/">maven模块化项目总共模块相互引用打包失败问题</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -306,8 +337,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

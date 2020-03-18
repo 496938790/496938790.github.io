@@ -152,6 +152,75 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-redis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/11/redis/">redis学习笔记 5种基本数据类型的介绍</a>
+    </h1>
+  
+
+        
+        <a href="/2020/01/11/redis/" class="archive-article-date">
+  	<time datetime="2020-01-10T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>公司所用的项目只用到了redis进行数据字典缓存，而且是封装好了，准备自己上网去从头开始看一下redis,做个笔记记录一下QAQ(懒得排版所以样式好丑hhhhhh)</p>
+<p>1.redis要解决的问题<br>海量用户<br>高并发</p>
+<p>解决思路<br>降低磁盘io<br>去除数据之间的关系，越简单越好<br>2.redis简介<br>C语言开发的一个开源的高性能键值对数据库<br>特征：<br>数据间没有必然的关联关系<br>内部采用单线程进行工作<br>高性能<br>多数据类型支持<br>持久化支持。进行数据灾难恢复（非主推）<br>3.redis的应用<br>热点数据加速查询。微博热点<br>任务队列，抢票，秒杀<br>即时信息查询<br>时效性信息控制<br>分布式数据分享，分布式集群架构中的session分离<br>分布式锁<br>4.redis的基本操作<br>5.redis存储类型<br>string hash list set sorted_set<br>redis自身是一个MAP 所有的数据都是采用key : value的形式</p>
+<p>string 添加修改 set get del</p>
+<p>hash 一个存储空间保存多个键值对信息<br>当hash里面的K数量较小，存储结构优化成类数组结构。<br>较多，使用的hashMap结构<br>hset key filed value<br>hget hgetall key<br>hash类型下只能存储字符串，不存在嵌套现象<br>不能讲hash作为对象列表使用</p>
+<p>list存储多个数据，并对数据进入存储空间的顺序进行区分<br>底层使用双向链表存储结构<br>lpush rpush<br>lrange key start stop<br>lindex key<br>llen key<br>日志队列</p>
+<p>set存储大量数据，在查询方面提供高效率<br>sadd smember srem scard sismember<br>选爱好，摸索你喜欢什么东西，随机推荐歌曲，热点新闻，推荐APP<br>访问数据的统计，权限，黑白名单的操作<br>srandmember 随机获取集合中指定数量的数据 数据不变<br>spop 随机获取集合中的某个数据并将数据移出集合<br>交集，并集操作 比如两个人都关注同一个公众号，那么没有关注的公众号可以互相推荐给对方<br>sinter sunion sdiff<br>sinterstore</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/11/redis/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-idea全局配置maven的方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
